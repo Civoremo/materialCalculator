@@ -9,10 +9,11 @@ import Results1x2 from "./components/results1by2";
 
 class App extends Component {
 	state = {
-		pieces1x2: [3, 3, 5, 8, 11, 14, 14],
-		// pieces1x2: [],
+		// pieces1x2: [3, 3, 5, 8, 11, 14, 14],
+		pieces1x2: [98, 98, 134, 48, 48],
 		pieces2x2: [],
-		material1x2: [20, 24, 30],
+		// material1x2: [20, 24, 30],
+		material1x2: [240, 288, 360],
 		material2x2: [],
 		cut1x2text: "",
 		cut2x2text: "",
@@ -69,8 +70,23 @@ class App extends Component {
 		console.log("UPDATED MESSAGE ", this.state.result1x2CutList);
 	};
 
-	calculate1x2 = event => {
+	clearResults = event => {
 		event.preventDefault();
+		const emptyArr = [];
+		this.setState(
+			{
+				result1x2: emptyArr,
+				result1x2CutList: emptyArr,
+			},
+			() => this.calculate1x2()
+		);
+
+		console.log(this.state.result1x2, this.state.result1x2CutList);
+	};
+
+	calculate1x2 = event => {
+		// event.preventDefault();
+		// this.clearResults();
 		let waste = 0;
 		let cutsArray = [...this.state.pieces1x2];
 		let materialCount = 0;
@@ -91,6 +107,7 @@ class App extends Component {
 			materialCount = 0;
 			order = [];
 			currentMaterial = this.state.material1x2[z];
+			cutsArray = cutsArray.sort((a, b) => a - b);
 
 			console.log("");
 			console.log("-------------------------");
@@ -118,7 +135,7 @@ class App extends Component {
 				currentMaterial = this.state.material1x2[z];
 				materialCount++;
 				console.log("--- Cuts made on this material: ", order);
-				cutList[z].push({ currentMaterial: order });
+				cutList[z].push(order);
 				order = [];
 				console.log("NEW material started; count: ", materialCount);
 				while (currentMaterial > 0 && cutsArray.length > 0) {
@@ -169,7 +186,7 @@ class App extends Component {
 			console.log("PIECES ARR ", this.state.pieces1x2);
 			console.log("");
 			console.log("--- Cuts made on this material: ", order);
-			cutList[z].push({ currentMaterial: order });
+			cutList[z].push(order);
 			cutList[z].shift();
 			console.log("LIST FOR CUTTING ", cutList);
 			console.log(
@@ -217,7 +234,8 @@ class App extends Component {
 						/>
 					</div>
 				</div>
-				<button onClick={this.calculate1x2}>Calculate 1x2</button>
+				{/* <button onClick={this.calculate1x2}>Calculate 1x2</button> */}
+				<button onClick={this.clearResults}>Calculate 1x2</button>
 				<div>
 					<Results1x2
 						result1x2={this.state.result1x2}

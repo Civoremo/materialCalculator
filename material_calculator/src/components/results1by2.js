@@ -1,5 +1,7 @@
 import React from "react";
 
+import ResultCard from "./resultCard";
+
 const Results1x2 = props => {
 	const { result1x2, result1x2CutList } = props;
 	console.log("RESULTS ", result1x2CutList);
@@ -8,22 +10,19 @@ const Results1x2 = props => {
 	if (result1x2CutList === "undefined" || result1x2CutList.length === 0) {
 		return <div style={{ marginTop: "10px" }}>No Results Yet</div>;
 	}
+	console.log("DATA BEFORE THE LOCATION ++++++++++++++++++", result1x2CutList[0]);
 	return (
-		<div>
-			{/* <div>{result1x2[0]}</div>
-			{result1x2CutList.map((obj, index) => {
-				console.log("OBJECT array ", obj);
-				console.log("each item ", obj.currentMaterial);
+		<div style={{ display: "flex", justifyContent: "space-around" }}>
+			{result1x2.map((item, indexResult) => {
 				return (
-					<div key={index} style={{ marginTop: "10px" }}>
-						[
-						{obj.currentMaterial.map((num, index) => {
-							return <span key={index}>{` ${num}, `}</span>;
-						})}
-						]
-					</div>
+					<ResultCard
+						key={indexResult}
+						result1x2={item}
+						result1x2CutList={result1x2CutList[0]}
+						location={indexResult}
+					/>
 				);
-			})} */}
+			})}
 		</div>
 	);
 };
