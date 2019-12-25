@@ -1,6 +1,6 @@
 import React from "react";
 
-const ResultCard = props => {
+const ResultCard1x2 = props => {
 	const { result1x2, result1x2CutList, location } = props;
 	// console.log(result1x2);
 	console.log("HERE", result1x2CutList);
@@ -33,4 +33,4 @@ const ResultCard = props => {
 	);
 };
 
-export default ResultCard;
+export default ResultCard1x2;

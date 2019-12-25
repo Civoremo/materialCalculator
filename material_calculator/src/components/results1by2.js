@@ -1,6 +1,6 @@
 import React from "react";
 
-import ResultCard from "./resultCard";
+import ResultCard from "./resultCard1x2";
 
 const Results1x2 = props => {
 	const { result1x2, result1x2CutList } = props;
