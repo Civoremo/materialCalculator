@@ -14,6 +14,7 @@ import {
 	clearResults2x2,
 	calculate2x2,
 	remove1x2Piece,
+	setUnits1x2,
 } from "./helpers/helperFunctions";
 
 import Add1by2Cut from "./components/add1by2cut";
@@ -22,6 +23,7 @@ import Add1by2Materials from "./components/add1by2MaterialSizes";
 import Add2by2Materials from "./components/add2by2MaterialSizes";
 import Results1x2 from "./components/results1by2";
 import Results2x2 from "./components/results2by2";
+import Add1x2Units from "./components/addUnits1x2";
 
 class App extends Component {
 	constructor(props) {
@@ -41,6 +43,9 @@ class App extends Component {
 			result2x2: [],
 			result1x2CutList: [],
 			result2x2CutList: [],
+			waste1x2: [],
+			units1x2text: 1,
+			units1x2: 1,
 		};
 		this.handleInputChange = handleInputChange.bind(this);
 		this.add1x2Cut = add1x2Cut.bind(this);
@@ -54,6 +59,7 @@ class App extends Component {
 		this.clearResults2x2 = clearResults2x2.bind(this);
 		this.calculate2x2 = calculate2x2.bind(this);
 		this.remove1x2Piece = remove1x2Piece.bind(this);
+		this.setUnits1x2 = setUnits1x2.bind(this);
 	}
 
 	render() {
@@ -77,6 +83,13 @@ class App extends Component {
 							remove1x2Piece={this.remove1x2Piece}
 						/>
 					</div>
+					<div>
+						<Add1x2Units
+							handleInputChange={this.handleInputChange}
+							units1x2text={this.state.units1x2text}
+							setUnits1x2={this.setUnits1x2}
+						/>
+					</div>
 					<div style={{ width: "45%", float: "right", border: "1px solid green" }}>
 						<Add1by2Materials
 							material1x2={this.state.material1x2}
@@ -86,11 +99,13 @@ class App extends Component {
 						/>
 					</div>
 				</div>
+				<div>Units: {this.state.units1x2}</div>
 				<button onClick={this.clearResults1x2}>Calculate 1x2</button>
 				<div>
 					<Results1x2
 						result1x2={this.state.result1x2}
 						result1x2CutList={this.state.result1x2CutList}
+						waste1x2={this.state.waste1x2}
 					/>
 				</div>
 				<div

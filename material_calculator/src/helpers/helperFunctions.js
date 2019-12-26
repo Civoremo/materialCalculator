@@ -5,6 +5,13 @@ export const handleInputChange = function handleInputChange(event) {
 	// console.log(event.target.name + ` - ${event.target.value}`);
 };
 
+export const setUnits1x2 = function(event) {
+	event.preventDefault();
+	this.setState({
+		units1x2: this.state.units1x2text,
+	});
+};
+
 export const add1x2Cut = function add1x2Cut(event) {
 	event.preventDefault();
 	this.setState({
@@ -46,11 +53,12 @@ export const add2x2Material = function add2x2Material(event) {
 	});
 };
 
-export function result1x2Posting(result, cuttingList) {
+export function result1x2Posting(result, cuttingList, waste) {
 	// console.log("MESSAGE FOR THIS MATERIAL", cuttingList);
 	this.setState({
 		result1x2: [...this.state.result1x2, ...result],
 		result1x2CutList: [...this.state.result1x2CutList, cuttingList],
+		waste1x2: [...this.state.waste1x2, waste],
 	});
 	// console.log("UPDATED MESSAGE ", this.state.result1x2CutList);
 }
@@ -71,6 +79,7 @@ export const clearResults1x2 = function clearResults1x2(event) {
 		{
 			result1x2: emptyArr,
 			result1x2CutList: emptyArr,
+			waste1x2: emptyArr,
 		},
 		() => this.calculate1x2()
 	);
@@ -148,22 +157,32 @@ export const calculate2x2 = function(event) {
 
 export const calculate1x2 = function(event) {
 	let waste = 0;
-	let cutsArray = [...this.state.pieces1x2];
+	// let cutsArray = [...this.state.pieces1x2];
+	let cutsArray = [];
 	let materialCount = 0;
 	let order = [];
 	let cutList = [];
 	let currentMaterial = 0;
 	let resultMessage = [];
+	let fullCutsArray = [];
+	let wasteArray = [];
 
 	for (let y = 0; y < this.state.material1x2.length; y++) {
 		cutList.push([]);
 		resultMessage.push([]);
+		wasteArray.push([]);
 	}
-	// console.log("NEW Cutlist ", cutList);
+
+	for (let h = 0; h < this.state.units1x2; h++) {
+		cutsArray = cutsArray.concat(...this.state.pieces1x2);
+	}
+
+	fullCutsArray = [...cutsArray];
 
 	for (let z = 0; z < this.state.material1x2.length; z++) {
 		waste = 0;
-		cutsArray = [...this.state.pieces1x2];
+		// cutsArray = [...this.state.pieces1x2];
+		cutsArray = [...fullCutsArray];
 		materialCount = 0;
 		order = [];
 		currentMaterial = this.state.material1x2[z];
@@ -239,6 +258,7 @@ export const calculate1x2 = function(event) {
 				waste += currentMaterial;
 				// console.log("WASTE 2: ", waste);
 			}
+			wasteArray[z].push(currentMaterial);
 		}
 		// console.log("");
 		// console.log("");
@@ -261,6 +281,6 @@ export const calculate1x2 = function(event) {
 		resultMessage[z].push(
 			`Size of: ${this.state.material1x2[z]}in   ||   Quantity: ${materialCount}   ||   Waste: ${waste}in`
 		);
-		this.result1x2Posting(resultMessage, cutList);
+		this.result1x2Posting(resultMessage, cutList, wasteArray);
 	}
 };
