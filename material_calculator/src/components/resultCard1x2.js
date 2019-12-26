@@ -36,8 +36,7 @@ const ResultCard1x2 = props => {
 								{waste1x2.map((waste, indexWaste) => {
 									return (
 										<span key={indexWaste} style={{ marginLeft: "20px" }}>
-											{console.log("WASTE 1 ", waste[location])}
-											Waste -> {waste[location][indexCutList]}
+											remain -> {waste[location][indexCutList]}
 										</span>
 									);
 								})}

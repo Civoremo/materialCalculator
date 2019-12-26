@@ -3,7 +3,7 @@ import React from "react";
 import ResultCard from "./resultCard2x2";
 
 const Results2x2 = props => {
-	const { result2x2, result2x2CutList } = props;
+	const { result2x2, result2x2CutList, waste2x2 } = props;
 	console.log("RESULTS ", result2x2CutList);
 	console.log("MESSAGE ", result2x2);
 
@@ -20,6 +20,7 @@ const Results2x2 = props => {
 						result2x2={item}
 						result2x2CutList={result2x2CutList[0]}
 						location={indexResult}
+						waste2x2={waste2x2}
 					/>
 				);
 			})}

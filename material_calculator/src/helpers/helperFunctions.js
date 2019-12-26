@@ -5,10 +5,17 @@ export const handleInputChange = function handleInputChange(event) {
 	// console.log(event.target.name + ` - ${event.target.value}`);
 };
 
-export const setUnits1x2 = function(event) {
+export const setUnits1x2 = function setUnits1x2(event) {
 	event.preventDefault();
 	this.setState({
 		units1x2: this.state.units1x2text,
+	});
+};
+
+export const setUnits2x2 = function setUnits2x2(event) {
+	event.preventDefault();
+	this.setState({
+		units2x2: this.state.units2x2text,
 	});
 };
 
@@ -36,13 +43,28 @@ export const add2x2Cut = function add2x2Cut(event) {
 	});
 };
 
+export const remove2x2Piece = function remove2x2Piece(itemIndex) {
+	let temp = this.state.pieces2x2.sort((a, b) => a - b);
+	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
+	this.setState({
+		pieces2x2: temp,
+	});
+};
+
 export const add1x2Material = function add1x2Material(event) {
 	event.preventDefault();
 	this.setState({
 		material1x2: [...this.state.material1x2, parseInt(this.state.length1x2materialText)],
 		length1x2materialText: "",
 	});
-	// console.log(this.state.length1x2materialText);
+};
+
+export const remove1x2Material = function(itemIndex) {
+	let temp = this.state.material1x2.sort((a, b) => a - b);
+	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
+	this.setState({
+		material1x2: temp,
+	});
 };
 
 export const add2x2Material = function add2x2Material(event) {
@@ -50,6 +72,14 @@ export const add2x2Material = function add2x2Material(event) {
 	this.setState({
 		material2x2: [...this.state.material2x2, parseInt(this.state.length2x2materialText)],
 		length2x2materialText: "",
+	});
+};
+
+export const remove2x2Material = function remove2x2Material(itemIndex) {
+	let temp = this.state.material2x2.sort((a, b) => a - b);
+	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
+	this.setState({
+		material2x2: temp,
 	});
 };
 
@@ -63,11 +93,12 @@ export function result1x2Posting(result, cuttingList, waste) {
 	// console.log("UPDATED MESSAGE ", this.state.result1x2CutList);
 }
 
-export function result2x2Posting(result, cuttingList) {
+export function result2x2Posting(result, cuttingList, waste) {
 	// console.log("MESSAGE FOR THIS MATERIAL", cuttingList);
 	this.setState({
 		result2x2: [...this.state.result2x2, ...result],
 		result2x2CutList: [...this.state.result2x2CutList, cuttingList],
+		waste2x2: [...this.state.waste2x2, waste],
 	});
 	// console.log("UPDATED MESSAGE ", this.state.result1x2CutList);
 }
@@ -92,6 +123,7 @@ export const clearResults2x2 = function clearResults2x2(event) {
 		{
 			result2x2: emptyArr,
 			result2x2CutList: emptyArr,
+			waste2x2: emptyArr,
 		},
 		() => this.calculate2x2()
 	);
@@ -99,21 +131,32 @@ export const clearResults2x2 = function clearResults2x2(event) {
 
 export const calculate2x2 = function(event) {
 	let waste = 0;
-	let cutsArray = [...this.state.pieces2x2];
+	// let cutsArray = [...this.state.pieces2x2];
+	let cutsArray = [];
 	let materialCount = 0;
 	let order = [];
 	let cutList = [];
 	let currentMaterial = 0;
 	let resultMessage = [];
+	let fullCutsArray = [];
+	let wasteArray = [];
 
 	for (let y = 0; y < this.state.material2x2.length; y++) {
 		cutList.push([]);
 		resultMessage.push([]);
+		wasteArray.push([]);
 	}
+
+	for (let h = 0; h < this.state.units2x2; h++) {
+		cutsArray = cutsArray.concat(...this.state.pieces2x2);
+	}
+
+	fullCutsArray = [...cutsArray];
 
 	for (let z = 0; z < this.state.material2x2.length; z++) {
 		waste = 0;
-		cutsArray = [...this.state.pieces2x2];
+		// cutsArray = [...this.state.pieces2x2];
+		cutsArray = [...fullCutsArray];
 		materialCount = 0;
 		order = [];
 		currentMaterial = this.state.material2x2[z];
@@ -145,13 +188,14 @@ export const calculate2x2 = function(event) {
 			if (cutsArray.length === 0) {
 				waste += currentMaterial;
 			}
+			wasteArray[z].push(currentMaterial);
 		}
 		cutList[z].push(order);
 		cutList[z].shift();
 		resultMessage[z].push(
 			`Size of: ${this.state.material2x2[z]}in   ||   Quantity: ${materialCount}   ||   Waste: ${waste}in`
 		);
-		this.result2x2Posting(resultMessage, cutList);
+		this.result2x2Posting(resultMessage, cutList, wasteArray);
 	}
 };
 
