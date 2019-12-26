@@ -77,7 +77,10 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				{console.log("OUR ORIGINAL ARR ", this.state.pieces1x2)}
+				{/* {console.log("OUR ORIGINAL ARR ", this.state.pieces1x2)} */}
+				<div style={{ margin: "20px 0", fontWeight: "bold", fontSize: "1.6rem" }}>
+					Optimal Material Calculator
+				</div>
 				<div
 					style={{
 						display: "flex",
@@ -125,7 +128,8 @@ class App extends Component {
 					</div>
 				</div>
 				<div>Units: {this.state.units1x2}</div>
-				<button onClick={this.clearResults1x2}>Calculate 1x2</button>
+				{/* <button onClick={this.clearResults1x2}>Calculate 1x2</button> */}
+				<button onClick={this.clearResults1x2}>Calculate</button>
 				<div>
 					<Results1x2
 						result1x2={this.state.result1x2}
@@ -133,7 +137,7 @@ class App extends Component {
 						waste1x2={this.state.waste1x2}
 					/>
 				</div>
-				<div
+				{/* <div
 					style={{
 						display: "flex",
 						justifyContent: "space-between",
@@ -187,7 +191,7 @@ class App extends Component {
 						result2x2CutList={this.state.result2x2CutList}
 						waste2x2={this.state.waste2x2}
 					/>
-				</div>
+				</div> */}
 			</div>
 		);
 	}

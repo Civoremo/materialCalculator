@@ -8,9 +8,10 @@ const Add1by2Cut = props => {
 		<div>
 			<div style={{ padding: "10px 0" }}>
 				<form onSubmit={props.add1x2Cut}>
-					<div>Add 1x2 piece to cut</div>
+					{/* <div>Add 1x2 piece to cut</div> */}
+					<div>Add piece to cut</div>
 					<input
-						type="text"
+						type="number"
 						value={props.cut1x2text}
 						name="cut1x2text"
 						onChange={props.handleInputChange}

@@ -15,9 +15,10 @@ const Add1by2Materials = props => {
 		<div>
 			<div style={{ padding: "10px 0" }}>
 				<form onSubmit={add1x2Material}>
-					<div>Add 1x2 material size</div>
+					{/* <div>Add 1x2 material size</div> */}
+					<div>Add material size</div>
 					<input
-						text="text"
+						type="number"
 						value={length1x2materialText}
 						name="length1x2materialText"
 						onChange={handleInputChange}
