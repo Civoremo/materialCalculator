@@ -9,6 +9,15 @@ export const add1x2Cut = function add1x2Cut(event) {
 	event.preventDefault();
 	this.setState({
 		pieces1x2: [...this.state.pieces1x2, parseInt(this.state.cut1x2text)],
+		cut1x2text: "",
+	});
+};
+
+export const remove1x2Piece = function remove1x2Piece(itemIndex) {
+	let temp = this.state.pieces1x2.sort((a, b) => a - b);
+	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
+	this.setState({
+		pieces1x2: temp,
 	});
 };
 
@@ -16,6 +25,7 @@ export const add2x2Cut = function add2x2Cut(event) {
 	event.preventDefault();
 	this.setState({
 		pieces2x2: [...this.state.pieces2x2, parseInt(this.state.cut2x2text)],
+		cut2x2text: "",
 	});
 };
 
@@ -23,6 +33,7 @@ export const add1x2Material = function add1x2Material(event) {
 	event.preventDefault();
 	this.setState({
 		material1x2: [...this.state.material1x2, parseInt(this.state.length1x2materialText)],
+		length1x2materialText: "",
 	});
 	// console.log(this.state.length1x2materialText);
 };
@@ -31,6 +42,7 @@ export const add2x2Material = function add2x2Material(event) {
 	event.preventDefault();
 	this.setState({
 		material2x2: [...this.state.material2x2, parseInt(this.state.length2x2materialText)],
+		length2x2materialText: "",
 	});
 };
 
@@ -47,7 +59,7 @@ export function result2x2Posting(result, cuttingList) {
 	// console.log("MESSAGE FOR THIS MATERIAL", cuttingList);
 	this.setState({
 		result2x2: [...this.state.result2x2, ...result],
-		result2x2CutList: [...this.state.result1x2CutList, cuttingList],
+		result2x2CutList: [...this.state.result2x2CutList, cuttingList],
 	});
 	// console.log("UPDATED MESSAGE ", this.state.result1x2CutList);
 }

@@ -13,6 +13,7 @@ import {
 	result2x2Posting,
 	clearResults2x2,
 	calculate2x2,
+	remove1x2Piece,
 } from "./helpers/helperFunctions";
 
 import Add1by2Cut from "./components/add1by2cut";
@@ -52,6 +53,7 @@ class App extends Component {
 		this.result2x2Posting = result2x2Posting.bind(this);
 		this.clearResults2x2 = clearResults2x2.bind(this);
 		this.calculate2x2 = calculate2x2.bind(this);
+		this.remove1x2Piece = remove1x2Piece.bind(this);
 	}
 
 	render() {
@@ -72,6 +74,7 @@ class App extends Component {
 							add1x2Cut={this.add1x2Cut}
 							handleInputChange={this.handleInputChange}
 							pieces1x2={this.state.pieces1x2}
+							remove1x2Piece={this.remove1x2Piece}
 						/>
 					</div>
 					<div style={{ width: "45%", float: "right", border: "1px solid green" }}>

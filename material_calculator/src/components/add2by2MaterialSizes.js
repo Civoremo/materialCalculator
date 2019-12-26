@@ -7,13 +7,14 @@ const Add2by2Materials = props => {
 	return (
 		<div>
 			<div>
-				<form>
+				<form onSubmit={add2x2Material}>
 					<div>Add 2x2 material size</div>
 					<input
 						text="text"
 						value={length2x2materialText}
 						name="length2x2materialText"
 						onChange={handleInputChange}
+						autoComplete="off"
 					/>
 				</form>
 				<button onClick={add2x2Material}>Add</button>

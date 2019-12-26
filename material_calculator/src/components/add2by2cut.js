@@ -7,13 +7,14 @@ const Add2by2Cut = props => {
 	return (
 		<div>
 			<div>
-				<form>
+				<form onSubmit={props.add2x2Cut}>
 					<div>Add 2x2 piece to cut</div>
 					<input
 						type="text"
 						value={props.cut2x2text}
 						name="cut2x2text"
 						onChange={props.handleInputChange}
+						autoComplete="off"
 					/>
 				</form>
 				<button onClick={props.add2x2Cut}>Add</button>
