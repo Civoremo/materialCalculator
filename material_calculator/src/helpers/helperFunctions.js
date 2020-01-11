@@ -21,10 +21,30 @@ export const setUnits2x2 = function setUnits2x2(event) {
 
 export const add1x2Cut = function add1x2Cut(event) {
 	event.preventDefault();
-	this.setState({
-		pieces1x2: [...this.state.pieces1x2, parseInt(this.state.cut1x2text)],
-		cut1x2text: "",
-	});
+	const labelSet = new Set(this.state.labels1x2);
+	console.log(labelSet);
+	const duplicate = labelSet.has(this.state.cut1x2label.toUpperCase());
+	console.log(duplicate);
+	console.log(this.state.cut1x2label);
+	if (duplicate) {
+		alert("label already exists");
+		return;
+	}
+	if (
+		this.state.cut1x2label === "" ||
+		this.state.cut1x2text === "" ||
+		typeof this.state.cut1x2text == "number"
+	) {
+		alert("incorrect or missing inputs, check and try again");
+		return;
+	} else {
+		this.setState({
+			pieces1x2: [...this.state.pieces1x2, parseInt(this.state.cut1x2text)],
+			labels1x2: [...this.state.labels1x2, this.state.cut1x2label.toUpperCase()],
+			cut1x2text: "",
+			cut1x2label: "",
+		});
+	}
 };
 
 export const remove1x2Piece = function remove1x2Piece(itemIndex) {

@@ -1,38 +1,47 @@
 import React from "react";
 
 const ListOf1x2Cuts = props => {
-	const { pieces1x2, remove1x2Piece } = props;
+	const { pieces1x2, labels1x2, remove1x2Piece } = props;
 
 	if (pieces1x2 === "undefined" || pieces1x2.length === 0) {
 		return <div style={{ marginTop: "10px" }}>empty</div>;
 	}
-	return pieces1x2
-		.sort((a, b) => a - b)
-		.map((item, index) => {
-			return (
-				<div
-					key={index}
-					style={{
-						// marginTop: "10px",
-						padding: "5px 0",
-						display: "flex",
-						justifyContent: "center",
-						// borderBottom: "1px dotted grey",
-						backgroundColor: index % 2 === 0 ? "#fff" : "#e6e6e6",
-					}}
-				>
-					<span style={{ width: "70px" }}>{item} in</span>
-					<button
-						onClick={() => {
-							remove1x2Piece(index);
+
+	// const sortedLabels = labels1x2.sort();
+	let sortedCutPieces = [...pieces1x2];
+	sortedCutPieces = sortedCutPieces.sort((a, b) => a - b);
+	// console.log(sortedLabels);
+	// console.log(sortedCutPieces);
+	return (
+		pieces1x2
+			// .sort((a, b) => a - b)
+			.map((item, index) => {
+				return (
+					<div
+						key={index}
+						style={{
+							// marginTop: "10px",
+							padding: "5px 0",
+							display: "flex",
+							justifyContent: "center",
+							// borderBottom: "1px dotted grey",
+							backgroundColor: index % 2 === 0 ? "#fff" : "#e6e6e6",
 						}}
-						style={{ marginLeft: "30px", cursor: "hand" }}
 					>
-						-
-					</button>
-				</div>
-			);
-		});
+						<span>{labels1x2[index]}</span>
+						<span style={{ width: "70px" }}>{item} in</span>
+						<button
+							onClick={() => {
+								remove1x2Piece(index);
+							}}
+							style={{ marginLeft: "30px", cursor: "hand" }}
+						>
+							-
+						</button>
+					</div>
+				);
+			})
+	);
 };
 
 export default ListOf1x2Cuts;
