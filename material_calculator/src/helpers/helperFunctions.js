@@ -21,13 +21,17 @@ export const setUnits2x2 = function setUnits2x2(event) {
 
 export const add1x2Cut = function add1x2Cut(event) {
 	event.preventDefault();
-	const labelSet = new Set(this.state.labels1x2);
-	console.log(labelSet);
-	const duplicate = labelSet.has(this.state.cut1x2label.toUpperCase());
-	console.log(duplicate);
-	console.log(this.state.cut1x2label);
+	let duplicate = false;
+
+	this.state.pieces1x2ArrObj.forEach(obj => {
+		if (obj.label === this.state.cut1x2label.toUpperCase()) {
+			// alert("label already exists");
+			duplicate = true;
+		}
+	});
+
 	if (duplicate) {
-		alert("label already exists");
+		alert("label already exits");
 		return;
 	}
 	if (
@@ -39,6 +43,10 @@ export const add1x2Cut = function add1x2Cut(event) {
 		return;
 	} else {
 		this.setState({
+			pieces1x2ArrObj: [
+				...this.state.pieces1x2ArrObj,
+				{ label: this.state.cut1x2label.toUpperCase(), size: this.state.cut1x2text },
+			],
 			pieces1x2: [...this.state.pieces1x2, parseInt(this.state.cut1x2text)],
 			labels1x2: [...this.state.labels1x2, this.state.cut1x2label.toUpperCase()],
 			cut1x2text: "",
@@ -238,7 +246,8 @@ export const calculate1x2 = function(event) {
 	}
 
 	for (let h = 0; h < this.state.units1x2; h++) {
-		cutsArray = cutsArray.concat(...this.state.pieces1x2);
+		// cutsArray = cutsArray.concat(...this.state.pieces1x2);
+		cutsArray = cutsArray.concat(...this.state.pieces1x2ArrObj);
 	}
 
 	fullCutsArray = [...cutsArray];
@@ -250,7 +259,9 @@ export const calculate1x2 = function(event) {
 		materialCount = 0;
 		order = [];
 		currentMaterial = this.state.material1x2[z];
-		cutsArray = cutsArray.sort((a, b) => a - b);
+		console.log("PRESORTED ", cutsArray[0]);
+		cutsArray = cutsArray.sort((a, b) => (a.size > b.size ? 1 : -1));
+		console.log("SORTED ARR of OBJS ", cutsArray[0]);
 
 		// console.log("");
 		// console.log("-------------------------");
@@ -280,24 +291,24 @@ export const calculate1x2 = function(event) {
 			// console.log("--- Cuts made on this material: ", order);
 			cutList[z].push(order);
 			order = [];
-			// console.log("NEW material started; count: ", materialCount);
+			console.log("NEW material started; count: ", materialCount);
 			while (currentMaterial > 0 && cutsArray.length > 0) {
-				if (cutsArray[cutsArray.length - 1] > currentMaterial) {
+				if (cutsArray[cutsArray.length - 1].size > currentMaterial) {
 					// console.log("");
-					// console.log("TOO SHORT");
+					console.log("TOO SHORT");
 					for (let i = cutsArray.length - 1; i >= 0; i--) {
-						// console.log("ENTRY ARR 1: ", cutsArray);
+						console.log("ENTRY ARR 1: ", cutsArray);
 						// console.log("index ", i);
-						if (cutsArray[i] <= currentMaterial) {
+						if (cutsArray[i].size <= currentMaterial) {
 							// console.log("matrial length: ", currentMaterial);
-							// console.log("found: ", cutsArray[i], " at index ", i);
-							currentMaterial -= cutsArray[i];
+							console.log("found: ", cutsArray[i], " at index ", i);
+							currentMaterial -= cutsArray[i].size;
 							// console.log("material after cutting: ", currentMaterial);
 							// console.log("removed item 1: ", cutsArray[i]);
 							order.push(cutsArray[i]);
 							cutsArray = cutsArray.slice(0, i).concat(cutsArray.slice(i + 1, cutsArray.length));
 							// this.removeItem(cutsArray, i);
-							// console.log("array after slice: ", cutsArray);
+							console.log("array after slice: ", cutsArray);
 						}
 					}
 
@@ -310,7 +321,7 @@ export const calculate1x2 = function(event) {
 					// console.log("BIG ENOUGH");
 					// console.log("ENTRY ARR 2: ", cutsArray);
 					// console.log("material length: ", currentMaterial);
-					currentMaterial -= cutsArray[cutsArray.length - 1];
+					currentMaterial -= cutsArray[cutsArray.length - 1].size;
 					// console.log("material after cutting: ", currentMaterial);
 					// console.log("removed item 2: ", cutsArray[cutsArray.length - 1]);
 					order.push(cutsArray[cutsArray.length - 1]);

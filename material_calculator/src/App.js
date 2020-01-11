@@ -35,6 +35,13 @@ class App extends Component {
 		super(props);
 		this.state = {
 			// pieces1x2: [3, 3, 5, 8, 11, 14, 14],
+			pieces1x2ArrObj: [
+				{ label: "C", size: 98 },
+				{ label: "D", size: 98 },
+				{ label: "A", size: 134 },
+				{ label: "F", size: 48 },
+				{ label: "E", size: 48 },
+			],
 			pieces1x2: [98, 98, 134, 48, 48],
 			labels1x2: ["C", "D", "A", "F", "E"],
 			pieces2x2: [98, 98, 134, 48, 48],
@@ -97,6 +104,7 @@ class App extends Component {
 						<Add1by2Cut
 							cut1x2text={this.state.cut1x2text}
 							cut1x2label={this.state.cut1x2label}
+							pieces1x2ArrObj={this.state.pieces1x2ArrObj}
 							add1x2Cut={this.add1x2Cut}
 							handleInputChange={this.handleInputChange}
 							pieces1x2={this.state.pieces1x2}
