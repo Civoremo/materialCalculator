@@ -81,6 +81,18 @@ export const remove2x2Piece = function remove2x2Piece(itemIndex) {
 
 export const add1x2Material = function add1x2Material(event) {
 	event.preventDefault();
+	let checkFail = true;
+
+	this.state.material1x2.forEach(item => {
+		if (item > parseInt(this.state.length1x2materialText)) {
+			checkFail = false;
+		}
+	});
+
+	if (!checkFail) {
+		alert("material size needs to be larger than the largest piece we want to cut");
+		return;
+	}
 	this.setState({
 		material1x2: [...this.state.material1x2, parseInt(this.state.length1x2materialText)],
 		length1x2materialText: "",
