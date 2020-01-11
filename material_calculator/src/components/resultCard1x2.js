@@ -1,7 +1,7 @@
 import React from "react";
 
 const ResultCard1x2 = props => {
-	const { result1x2, result1x2CutList, location, waste1x2 } = props;
+	const { result1x2, result1x2CutList, location, waste1x2, resultLabel, resultMeasurement } = props;
 	// console.log(result1x2);
 	// console.log("HERE", result1x2CutList);
 	if (result1x2CutList[location] === "undefined" || result1x2CutList.length === 0) {
@@ -31,10 +31,26 @@ const ResultCard1x2 = props => {
 									return (
 										<span key={index2}>
 											{/* {console.log("Current Item ", item)} */}
-											{/* <span>{"("}</span> */}
-											<span>{` ${item.label}, `}</span>
-											{/* <span>{item.size}</span> */}
-											{/* <span>{" ), "}</span> */}
+											<span
+												style={{
+													display: resultLabel && resultMeasurement ? "inline" : "none",
+												}}
+											>
+												{"("}
+											</span>
+											<span
+												style={{ display: resultLabel ? "inline" : "none" }}
+											>{` ${item.label}, `}</span>
+											<span
+												style={{ display: resultMeasurement ? "inline" : "none" }}
+											>{` ${item.size}, `}</span>
+											<span
+												style={{
+													display: resultLabel && resultMeasurement ? "inline" : "none",
+												}}
+											>
+												{" ), "}
+											</span>
 										</span>
 									);
 								})}

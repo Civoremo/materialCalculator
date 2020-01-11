@@ -63,6 +63,8 @@ class App extends Component {
 			units1x2: 1,
 			units2x2text: 1,
 			units2x2: 1,
+			resultLabel: true,
+			resultMeasurement: false,
 		};
 		this.handleInputChange = handleInputChange.bind(this);
 		this.add1x2Cut = add1x2Cut.bind(this);
@@ -141,12 +143,62 @@ class App extends Component {
 				</div>
 				<div>Units: {this.state.units1x2}</div>
 				{/* <button onClick={this.clearResults1x2}>Calculate 1x2</button> */}
+				<div
+					style={{
+						// width: "250px",
+						display: "flex",
+						justifyContent: "center",
+						margin: "auto",
+					}}
+				>
+					<div style={{ display: "flex" }}>
+						<input
+							type="checkbox"
+							name="resultLabel"
+							checked={this.state.resultLabel}
+							// onClick={this.changeResultFormat}
+							onChange={e => {
+								this.handleInputChange({
+									target: {
+										name: e.target.name,
+										value: e.target.checked,
+									},
+								});
+							}}
+						/>
+						<div>
+							<span>Label</span>
+						</div>
+					</div>
+					<div style={{ marginLeft: "20px", display: "flex" }}>
+						<input
+							type="checkbox"
+							name="resultMeasurement"
+							checked={this.state.resultMeasurement}
+							// onClick={this.changeResultFormat}
+							onChange={e => {
+								this.handleInputChange({
+									target: {
+										name: e.target.name,
+										value: e.target.checked,
+									},
+								});
+							}}
+						/>
+						<div>
+							<span>Measurement</span>
+						</div>
+					</div>
+					{console.log("our current checkbox ", this.state.resultLabel)}
+				</div>
 				<button onClick={this.clearResults1x2}>Calculate</button>
 				<div>
 					<Results1x2
 						result1x2={this.state.result1x2}
 						result1x2CutList={this.state.result1x2CutList}
 						waste1x2={this.state.waste1x2}
+						resultLabel={this.state.resultLabel}
+						resultMeasurement={this.state.resultMeasurement}
 					/>
 				</div>
 				{/* <div
