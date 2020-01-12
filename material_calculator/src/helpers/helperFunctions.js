@@ -5,6 +5,36 @@ export const handleInputChange = function handleInputChange(event) {
 	// console.log(event.target.name + ` - ${event.target.value}`);
 };
 
+export const formatResultForSaving = function formatResultForSaving(materialIndex) {
+	let newData = [];
+	let tempArr = [];
+
+	if (this.state.saveFilename === "") {
+		this.setState({
+			saveFilename: "OMCresults",
+		});
+	}
+
+	this.state.result1x2CutList.forEach((initial, index) => {
+		// console.log(initial[materialIndex]);
+		for (let i = 0; i < initial[materialIndex].length; i++) {
+			// console.log(initial[materialIndex][i].length);
+			// console.log(`initial arr `, initial[materialIndex][i]);
+			tempArr = [];
+			for (let x = 0; x < initial[materialIndex][i].length; x++) {
+				// console.log(`initial index ${i}`, initial[materialIndex][i][x].label);
+				tempArr.push(initial[materialIndex][i][x].label);
+			}
+			newData.push(tempArr);
+		}
+	});
+	console.log(newData);
+
+	this.setState({
+		formatedArr: newData,
+	});
+};
+
 export const setUnits1x2 = function setUnits1x2(event) {
 	event.preventDefault();
 	this.setState({

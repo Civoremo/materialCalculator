@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { CSVLink, CSVDownload } from "react-csv";
 import "./App.css";
 
 import {
@@ -19,6 +20,7 @@ import {
 	remove1x2Material,
 	remove2x2Piece,
 	remove2x2Material,
+	formatResultForSaving,
 } from "./helpers/helperFunctions";
 
 import Add1by2Cut from "./components/add1by2cut";
@@ -29,6 +31,8 @@ import Results1x2 from "./components/results1by2";
 import Results2x2 from "./components/results2by2";
 import Add1x2Units from "./components/addUnits1x2";
 import Add2x2Units from "./components/addUnits2x2";
+import SaveToCSV from "./components/saveToCSV";
+import SaveFToCSV from "./components/saveToCSV";
 
 class App extends Component {
 	constructor(props) {
@@ -65,8 +69,11 @@ class App extends Component {
 			units2x2: 1,
 			resultLabel: true,
 			resultMeasurement: false,
+			saveFilename: "",
+			formatedArr: [],
 		};
 		this.handleInputChange = handleInputChange.bind(this);
+		this.formatResultForSaving = formatResultForSaving.bind(this);
 		this.add1x2Cut = add1x2Cut.bind(this);
 		this.add1x2Material = add1x2Material.bind(this);
 		this.add2x2Cut = add2x2Cut.bind(this);
@@ -199,8 +206,20 @@ class App extends Component {
 						waste1x2={this.state.waste1x2}
 						resultLabel={this.state.resultLabel}
 						resultMeasurement={this.state.resultMeasurement}
+						formatResultForSaving={this.formatResultForSaving}
+						saveFilename={this.state.saveFilename}
+						handleInputChange={this.handleInputChange}
+						formatedArr={this.state.formatedArr}
 					/>
 				</div>
+				{/* <div>
+					<SaveFToCSV
+						formatResultForSaving={this.formatResultForSaving}
+						saveFilename={this.state.saveFilename}
+						handleInputChange={this.handleInputChange}
+						formatedArr={this.state.formatedArr}
+					/>
+				</div> */}
 				{/* <div
 					style={{
 						display: "flex",
