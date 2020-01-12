@@ -8,12 +8,15 @@ export const handleInputChange = function handleInputChange(event) {
 export const formatResultForSaving = function formatResultForSaving(materialIndex) {
 	let newData = [];
 	let tempArr = [];
+	console.log(this.state.material1x2);
 
-	if (this.state.saveFilename === "") {
-		this.setState({
-			saveFilename: "OMCresults",
-		});
-	}
+	newData.push(["Results for material size " + this.state.material1x2[materialIndex]]);
+
+	// if (this.state.saveFilename === "") {
+	this.setState({
+		saveFilename: "omc_Results_" + this.state.material1x2[materialIndex],
+	});
+	// }
 
 	this.state.result1x2CutList.forEach((initial, index) => {
 		// console.log(initial[materialIndex]);
@@ -23,7 +26,22 @@ export const formatResultForSaving = function formatResultForSaving(materialInde
 			tempArr = [];
 			for (let x = 0; x < initial[materialIndex][i].length; x++) {
 				// console.log(`initial index ${i}`, initial[materialIndex][i][x].label);
-				tempArr.push(initial[materialIndex][i][x].label);
+				if (this.state.resultLabel && !this.state.resultMeasurement) {
+					tempArr.push(initial[materialIndex][i][x].label);
+				}
+				if (this.state.resultLabel && this.state.resultMeasurement) {
+					tempArr.push(
+						initial[materialIndex][i][x].label + " - " + initial[materialIndex][i][x].size
+					);
+				}
+				if (!this.state.resultLabel && this.state.resultMeasurement) {
+					tempArr.push(initial[materialIndex][i][x].size);
+				}
+				if (!this.state.resultLabel && !this.state.resultMeasurement) {
+					tempArr.push(
+						initial[materialIndex][i][x].label + " - " + initial[materialIndex][i][x].size
+					);
+				}
 			}
 			newData.push(tempArr);
 		}

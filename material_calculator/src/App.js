@@ -50,7 +50,7 @@ class App extends Component {
 			labels1x2: ["C", "D", "A", "F", "E"],
 			pieces2x2: [98, 98, 134, 48, 48],
 			// material1x2: [20, 24, 30],
-			material1x2: [240, 288, 360],
+			material1x2: [240, 200, 288, 420, 360],
 			material2x2: [240, 288, 360],
 			cut1x2text: "",
 			cut1x2label: "",

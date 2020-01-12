@@ -43,7 +43,7 @@ const ListOf1x2Cuts = props => {
 					);
 				})} */}
 			{pieces1x2ArrObj
-				.sort((a, b) => (a.size > b.size ? 1 : -1))
+				.sort((a, b) => (a.label > b.label ? 1 : -1))
 				.map((item, index) => {
 					return (
 						<div key={index}>
