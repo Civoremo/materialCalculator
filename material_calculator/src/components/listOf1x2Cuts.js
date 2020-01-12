@@ -1,21 +1,16 @@
 import React from "react";
 
 const ListOf1x2Cuts = props => {
-	const { pieces1x2, labels1x2, pieces1x2ArrObj, remove1x2Piece } = props;
+	const { pieces1x2ArrObj, remove1x2Piece } = props;
 
-	if (pieces1x2 === "undefined" || pieces1x2.length === 0) {
-		return <div style={{ marginTop: "10px" }}>empty</div>;
+	if (pieces1x2ArrObj === "undefined" || pieces1x2ArrObj.length === 0) {
+		return <div style={{ marginTop: "10px" }}>list is empty</div>;
 	}
 
-	// const sortedLabels = labels1x2.sort();
-	let sortedCutPieces = [...pieces1x2];
-	sortedCutPieces = sortedCutPieces.sort((a, b) => a - b);
-	// console.log(sortedLabels);
-	// console.log(sortedCutPieces);
 	return (
 		<div>
-			{/* {pieces1x2
-				// .sort((a, b) => a - b)
+			{pieces1x2ArrObj
+				.sort((a, b) => (a.label > b.label ? 1 : -1))
 				.map((item, index) => {
 					return (
 						<div
@@ -29,8 +24,11 @@ const ListOf1x2Cuts = props => {
 								backgroundColor: index % 2 === 0 ? "#fff" : "#e6e6e6",
 							}}
 						>
-							<span>{labels1x2[index]}</span>
-							<span style={{ width: "70px" }}>{item} in</span>
+							<span>
+								{item.label}
+								<span>{" - "}</span>
+							</span>
+							<span>{item.size}</span>
 							<button
 								onClick={() => {
 									remove1x2Piece(index);
@@ -39,19 +37,6 @@ const ListOf1x2Cuts = props => {
 							>
 								-
 							</button>
-						</div>
-					);
-				})} */}
-			{pieces1x2ArrObj
-				.sort((a, b) => (a.label > b.label ? 1 : -1))
-				.map((item, index) => {
-					return (
-						<div key={index}>
-							<span>
-								{item.label}
-								<span>{" - "}</span>
-							</span>
-							<span>{item.size}</span>
 						</div>
 					);
 				})}

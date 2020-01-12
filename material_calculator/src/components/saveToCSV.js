@@ -5,7 +5,7 @@ const SaveFToCSV = props => {
 	const {
 		formatResultForSaving,
 		saveFilename,
-		handleInputChange,
+		// handleInputChange,
 		formatedArr,
 		resultIndex,
 	} = props;

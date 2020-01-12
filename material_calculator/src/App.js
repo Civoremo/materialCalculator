@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { CSVLink, CSVDownload } from "react-csv";
 import "./App.css";
 
 import {
@@ -31,14 +30,11 @@ import Results1x2 from "./components/results1by2";
 import Results2x2 from "./components/results2by2";
 import Add1x2Units from "./components/addUnits1x2";
 import Add2x2Units from "./components/addUnits2x2";
-import SaveToCSV from "./components/saveToCSV";
-import SaveFToCSV from "./components/saveToCSV";
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			// pieces1x2: [3, 3, 5, 8, 11, 14, 14],
 			pieces1x2ArrObj: [
 				{ label: "C", size: 98 },
 				{ label: "D", size: 98 },
@@ -46,8 +42,6 @@ class App extends Component {
 				{ label: "F", size: 48 },
 				{ label: "E", size: 48 },
 			],
-			pieces1x2: [98, 98, 134, 48, 48],
-			labels1x2: ["C", "D", "A", "F", "E"],
 			pieces2x2: [98, 98, 134, 48, 48],
 			// material1x2: [20, 24, 30],
 			material1x2: [240, 200, 288, 420, 360],
@@ -116,8 +110,6 @@ class App extends Component {
 							pieces1x2ArrObj={this.state.pieces1x2ArrObj}
 							add1x2Cut={this.add1x2Cut}
 							handleInputChange={this.handleInputChange}
-							pieces1x2={this.state.pieces1x2}
-							labels1x2={this.state.labels1x2}
 							remove1x2Piece={this.remove1x2Piece}
 						/>
 					</div>

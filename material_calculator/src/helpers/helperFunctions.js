@@ -104,11 +104,23 @@ export const add1x2Cut = function add1x2Cut(event) {
 };
 
 export const remove1x2Piece = function remove1x2Piece(itemIndex) {
-	let temp = this.state.pieces1x2.sort((a, b) => a - b);
+	console.log("removing");
+	console.log(this.state.pieces1x2ArrObj);
+	// let temp = this.state.pieces1x2.sort((a, b) => a - b);
+	// let temp2 = this.state.labels1x2.sort((a, b) => a - b);
+	// let temp = this.state.pieces1x2ArrObj.sort((a, b) => (a > b ? 1 : -1));
+	let temp = this.state.pieces1x2ArrObj;
+	console.log(temp);
+	// temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
+	// temp2 = temp2.slice(0, itemIndex).concat(temp2.slice(itemIndex + 1, temp2.length));
 	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
 	this.setState({
-		pieces1x2: temp,
+		pieces1x2ArrObj: temp,
 	});
+	// this.setState({
+	// 	pieces1x2: temp,
+	// 	labels1x2: temp2,
+	// });
 };
 
 export const add2x2Cut = function add2x2Cut(event) {

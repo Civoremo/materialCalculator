@@ -1,7 +1,7 @@
 import React from "react";
 
 import ListOf1x2Materials from "./list1x2Materials";
-import { remove1x2Piece } from "../helpers/helperFunctions";
+// import { remove1x2Piece } from "../helpers/helperFunctions";
 
 const Add1by2Materials = props => {
 	const {

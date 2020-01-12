@@ -1,6 +1,5 @@
 import React from "react";
 import SaveToCSV from "./saveToCSV";
-import SaveFToCSV from "./saveToCSV";
 
 const ResultCard1x2 = props => {
 	const {
@@ -29,7 +28,7 @@ const ResultCard1x2 = props => {
 	// );
 	return (
 		<div style={{ marginTop: "50px" }}>
-			<SaveFToCSV
+			<SaveToCSV
 				formatResultForSaving={formatResultForSaving}
 				saveFilename={saveFilename}
 				handleInputChange={handleInputChange}

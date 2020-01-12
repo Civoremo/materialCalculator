@@ -3,7 +3,7 @@ import React from "react";
 import ListOf1x2Cuts from "./listOf1x2Cuts";
 
 const Add1by2Cut = props => {
-	const { pieces1x2, labels1x2, pieces1x2ArrObj, remove1x2Piece } = props;
+	const { pieces1x2ArrObj, remove1x2Piece } = props;
 	return (
 		<div>
 			<div style={{ padding: "10px 0" }}>
@@ -33,12 +33,7 @@ const Add1by2Cut = props => {
 					<button onClick={props.add1x2Cut}>Add</button>
 				</form>
 			</div>
-			<ListOf1x2Cuts
-				pieces1x2={pieces1x2}
-				remove1x2Piece={remove1x2Piece}
-				labels1x2={labels1x2}
-				pieces1x2ArrObj={pieces1x2ArrObj}
-			/>
+			<ListOf1x2Cuts remove1x2Piece={remove1x2Piece} pieces1x2ArrObj={pieces1x2ArrObj} />
 		</div>
 	);
 };
