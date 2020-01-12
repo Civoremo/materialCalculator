@@ -6,7 +6,7 @@ const ListOf1x2Materials = props => {
 		return <div style={{ marginTop: "10px" }}>empty</div>;
 	}
 	return (
-		<div>
+		<div style={{ width: "60%", margin: "auto" }}>
 			{material1x2
 				.sort((a, b) => a - b)
 				.map((item, index) => {

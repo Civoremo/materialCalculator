@@ -19,6 +19,7 @@ import {
 	remove1x2Material,
 	remove2x2Piece,
 	remove2x2Material,
+	formatResultForSaving,
 } from "./helpers/helperFunctions";
 
 import Add1by2Cut from "./components/add1by2cut";
@@ -34,7 +35,6 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			// pieces1x2: [3, 3, 5, 8, 11, 14, 14],
 			pieces1x2ArrObj: [
 				{ label: "C", size: 98 },
 				{ label: "D", size: 98 },
@@ -42,11 +42,9 @@ class App extends Component {
 				{ label: "F", size: 48 },
 				{ label: "E", size: 48 },
 			],
-			pieces1x2: [98, 98, 134, 48, 48],
-			labels1x2: ["C", "D", "A", "F", "E"],
 			pieces2x2: [98, 98, 134, 48, 48],
 			// material1x2: [20, 24, 30],
-			material1x2: [240, 288, 360],
+			material1x2: [240, 200, 288, 420, 360],
 			material2x2: [240, 288, 360],
 			cut1x2text: "",
 			cut1x2label: "",
@@ -65,8 +63,11 @@ class App extends Component {
 			units2x2: 1,
 			resultLabel: true,
 			resultMeasurement: false,
+			saveFilename: "",
+			formatedArr: [],
 		};
 		this.handleInputChange = handleInputChange.bind(this);
+		this.formatResultForSaving = formatResultForSaving.bind(this);
 		this.add1x2Cut = add1x2Cut.bind(this);
 		this.add1x2Material = add1x2Material.bind(this);
 		this.add2x2Cut = add2x2Cut.bind(this);
@@ -102,15 +103,13 @@ class App extends Component {
 						width: "90%",
 					}}
 				>
-					<div style={{ width: "40%", float: "left" }}>
+					<div style={{ width: "40%", float: "left", marginBottom: "40px" }}>
 						<Add1by2Cut
 							cut1x2text={this.state.cut1x2text}
 							cut1x2label={this.state.cut1x2label}
 							pieces1x2ArrObj={this.state.pieces1x2ArrObj}
 							add1x2Cut={this.add1x2Cut}
 							handleInputChange={this.handleInputChange}
-							pieces1x2={this.state.pieces1x2}
-							labels1x2={this.state.labels1x2}
 							remove1x2Piece={this.remove1x2Piece}
 						/>
 					</div>
@@ -199,8 +198,20 @@ class App extends Component {
 						waste1x2={this.state.waste1x2}
 						resultLabel={this.state.resultLabel}
 						resultMeasurement={this.state.resultMeasurement}
+						formatResultForSaving={this.formatResultForSaving}
+						saveFilename={this.state.saveFilename}
+						handleInputChange={this.handleInputChange}
+						formatedArr={this.state.formatedArr}
 					/>
 				</div>
+				{/* <div>
+					<SaveFToCSV
+						formatResultForSaving={this.formatResultForSaving}
+						saveFilename={this.state.saveFilename}
+						handleInputChange={this.handleInputChange}
+						formatedArr={this.state.formatedArr}
+					/>
+				</div> */}
 				{/* <div
 					style={{
 						display: "flex",

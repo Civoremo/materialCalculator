@@ -3,7 +3,17 @@ import React from "react";
 import ResultCard from "./resultCard1x2";
 
 const Results1x2 = props => {
-	const { result1x2, result1x2CutList, waste1x2, resultLabel, resultMeasurement } = props;
+	const {
+		result1x2,
+		result1x2CutList,
+		waste1x2,
+		resultLabel,
+		resultMeasurement,
+		formatResultForSaving,
+		saveFilename,
+		handleInputChange,
+		formatedArr,
+	} = props;
 	// console.log("RESULTS ", result1x2CutList);
 	// console.log("MESSAGE ", result1x2);
 	// console.log("WASTE ", waste1x2);
@@ -24,6 +34,11 @@ const Results1x2 = props => {
 						waste1x2={waste1x2}
 						resultLabel={resultLabel}
 						resultMeasurement={resultMeasurement}
+						formatResultForSaving={formatResultForSaving}
+						saveFilename={saveFilename}
+						handleInputChange={handleInputChange}
+						formatedArr={formatedArr}
+						resultIndex={indexResult}
 					/>
 				);
 			})}

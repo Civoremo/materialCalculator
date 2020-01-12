@@ -5,6 +5,54 @@ export const handleInputChange = function handleInputChange(event) {
 	// console.log(event.target.name + ` - ${event.target.value}`);
 };
 
+export const formatResultForSaving = function formatResultForSaving(materialIndex) {
+	let newData = [];
+	let tempArr = [];
+	console.log(this.state.material1x2);
+
+	newData.push(["Results for material size " + this.state.material1x2[materialIndex]]);
+
+	// if (this.state.saveFilename === "") {
+	this.setState({
+		saveFilename: "omc_Results_" + this.state.material1x2[materialIndex],
+	});
+	// }
+
+	this.state.result1x2CutList.forEach((initial, index) => {
+		// console.log(initial[materialIndex]);
+		for (let i = 0; i < initial[materialIndex].length; i++) {
+			// console.log(initial[materialIndex][i].length);
+			// console.log(`initial arr `, initial[materialIndex][i]);
+			tempArr = [];
+			for (let x = 0; x < initial[materialIndex][i].length; x++) {
+				// console.log(`initial index ${i}`, initial[materialIndex][i][x].label);
+				if (this.state.resultLabel && !this.state.resultMeasurement) {
+					tempArr.push(initial[materialIndex][i][x].label);
+				}
+				if (this.state.resultLabel && this.state.resultMeasurement) {
+					tempArr.push(
+						initial[materialIndex][i][x].label + " - " + initial[materialIndex][i][x].size
+					);
+				}
+				if (!this.state.resultLabel && this.state.resultMeasurement) {
+					tempArr.push(initial[materialIndex][i][x].size);
+				}
+				if (!this.state.resultLabel && !this.state.resultMeasurement) {
+					tempArr.push(
+						initial[materialIndex][i][x].label + " - " + initial[materialIndex][i][x].size
+					);
+				}
+			}
+			newData.push(tempArr);
+		}
+	});
+	console.log(newData);
+
+	this.setState({
+		formatedArr: newData,
+	});
+};
+
 export const setUnits1x2 = function setUnits1x2(event) {
 	event.preventDefault();
 	this.setState({
@@ -56,11 +104,23 @@ export const add1x2Cut = function add1x2Cut(event) {
 };
 
 export const remove1x2Piece = function remove1x2Piece(itemIndex) {
-	let temp = this.state.pieces1x2.sort((a, b) => a - b);
+	console.log("removing");
+	console.log(this.state.pieces1x2ArrObj);
+	// let temp = this.state.pieces1x2.sort((a, b) => a - b);
+	// let temp2 = this.state.labels1x2.sort((a, b) => a - b);
+	// let temp = this.state.pieces1x2ArrObj.sort((a, b) => (a > b ? 1 : -1));
+	let temp = this.state.pieces1x2ArrObj;
+	console.log(temp);
+	// temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
+	// temp2 = temp2.slice(0, itemIndex).concat(temp2.slice(itemIndex + 1, temp2.length));
 	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
 	this.setState({
-		pieces1x2: temp,
+		pieces1x2ArrObj: temp,
 	});
+	// this.setState({
+	// 	pieces1x2: temp,
+	// 	labels1x2: temp2,
+	// });
 };
 
 export const add2x2Cut = function add2x2Cut(event) {

@@ -1,7 +1,20 @@
 import React from "react";
+import SaveToCSV from "./saveToCSV";
 
 const ResultCard1x2 = props => {
-	const { result1x2, result1x2CutList, location, waste1x2, resultLabel, resultMeasurement } = props;
+	const {
+		result1x2,
+		result1x2CutList,
+		location,
+		waste1x2,
+		resultLabel,
+		resultMeasurement,
+		formatResultForSaving,
+		saveFilename,
+		handleInputChange,
+		formatedArr,
+		resultIndex,
+	} = props;
 	// console.log(result1x2);
 	// console.log("HERE", result1x2CutList);
 	if (result1x2CutList[location] === "undefined" || result1x2CutList.length === 0) {
@@ -14,7 +27,14 @@ const ResultCard1x2 = props => {
 	// 	location
 	// );
 	return (
-		<div>
+		<div style={{ marginTop: "50px" }}>
+			<SaveToCSV
+				formatResultForSaving={formatResultForSaving}
+				saveFilename={saveFilename}
+				handleInputChange={handleInputChange}
+				formatedArr={formatedArr}
+				resultIndex={resultIndex}
+			/>
 			<div style={{ padding: "10px 0 5px 0", borderBottom: "1px solid grey", marginBottom: "5px" }}>
 				{result1x2}
 			</div>
