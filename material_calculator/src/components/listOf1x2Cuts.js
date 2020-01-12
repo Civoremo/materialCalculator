@@ -8,7 +8,7 @@ const ListOf1x2Cuts = props => {
 	}
 
 	return (
-		<div>
+		<div style={{ width: "60%", margin: "auto" }}>
 			{pieces1x2ArrObj
 				.sort((a, b) => (a.label > b.label ? 1 : -1))
 				.map((item, index) => {

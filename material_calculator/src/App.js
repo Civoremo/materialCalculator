@@ -103,7 +103,7 @@ class App extends Component {
 						width: "90%",
 					}}
 				>
-					<div style={{ width: "40%", float: "left" }}>
+					<div style={{ width: "40%", float: "left", marginBottom: "40px" }}>
 						<Add1by2Cut
 							cut1x2text={this.state.cut1x2text}
 							cut1x2label={this.state.cut1x2label}
