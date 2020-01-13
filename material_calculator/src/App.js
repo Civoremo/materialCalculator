@@ -188,7 +188,7 @@ class App extends Component {
 							<span>Measurement</span>
 						</div>
 					</div>
-					{console.log("our current checkbox ", this.state.resultLabel)}
+					{/* {console.log("our current checkbox ", this.state.resultLabel)} */}
 				</div>
 				<button onClick={this.clearResults1x2}>Calculate</button>
 				<div>
