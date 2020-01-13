@@ -95,8 +95,8 @@ export const add1x2Cut = function add1x2Cut(event) {
 				...this.state.pieces1x2ArrObj,
 				{ label: this.state.cut1x2label.toUpperCase(), size: this.state.cut1x2text },
 			],
-			pieces1x2: [...this.state.pieces1x2, parseInt(this.state.cut1x2text)],
-			labels1x2: [...this.state.labels1x2, this.state.cut1x2label.toUpperCase()],
+			// pieces1x2: [...this.state.pieces1x2, parseInt(this.state.cut1x2text)],
+			// labels1x2: [...this.state.labels1x2, this.state.cut1x2label.toUpperCase()],
 			cut1x2text: "",
 			cut1x2label: "",
 		});
