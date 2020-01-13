@@ -8,9 +8,10 @@ export const handleInputChange = function handleInputChange(event) {
 export const formatResultForSaving = function formatResultForSaving(materialIndex) {
 	let newData = [];
 	let tempArr = [];
-	console.log(this.state.material1x2);
+	// console.log(this.state.material1x2);
 
-	newData.push(["Results for material size " + this.state.material1x2[materialIndex]]);
+	newData.push(this.state.result1x2[materialIndex]);
+	// newData.push(["Results for material size " + this.state.material1x2[materialIndex]]);
 
 	// if (this.state.saveFilename === "") {
 	this.setState({
@@ -46,7 +47,7 @@ export const formatResultForSaving = function formatResultForSaving(materialInde
 			newData.push(tempArr);
 		}
 	});
-	console.log(newData);
+	// console.log(newData);
 
 	this.setState({
 		formatedArr: newData,
@@ -104,13 +105,13 @@ export const add1x2Cut = function add1x2Cut(event) {
 };
 
 export const remove1x2Piece = function remove1x2Piece(itemIndex) {
-	console.log("removing");
-	console.log(this.state.pieces1x2ArrObj);
+	// console.log("removing");
+	// console.log(this.state.pieces1x2ArrObj);
 	// let temp = this.state.pieces1x2.sort((a, b) => a - b);
 	// let temp2 = this.state.labels1x2.sort((a, b) => a - b);
 	// let temp = this.state.pieces1x2ArrObj.sort((a, b) => (a > b ? 1 : -1));
 	let temp = this.state.pieces1x2ArrObj;
-	console.log(temp);
+	// console.log(temp);
 	// temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
 	// temp2 = temp2.slice(0, itemIndex).concat(temp2.slice(itemIndex + 1, temp2.length));
 	temp = temp.slice(0, itemIndex).concat(temp.slice(itemIndex + 1, temp.length));
@@ -331,9 +332,9 @@ export const calculate1x2 = function(event) {
 		materialCount = 0;
 		order = [];
 		currentMaterial = this.state.material1x2[z];
-		console.log("PRESORTED ", cutsArray[0]);
+		// console.log("PRESORTED ", cutsArray[0]);
 		cutsArray = cutsArray.sort((a, b) => (a.size > b.size ? 1 : -1));
-		console.log("SORTED ARR of OBJS ", cutsArray[0]);
+		// console.log("SORTED ARR of OBJS ", cutsArray[0]);
 
 		// console.log("");
 		// console.log("-------------------------");
@@ -363,24 +364,24 @@ export const calculate1x2 = function(event) {
 			// console.log("--- Cuts made on this material: ", order);
 			cutList[z].push(order);
 			order = [];
-			console.log("NEW material started; count: ", materialCount);
+			// console.log("NEW material started; count: ", materialCount);
 			while (currentMaterial > 0 && cutsArray.length > 0) {
 				if (cutsArray[cutsArray.length - 1].size > currentMaterial) {
 					// console.log("");
-					console.log("TOO SHORT");
+					// console.log("TOO SHORT");
 					for (let i = cutsArray.length - 1; i >= 0; i--) {
-						console.log("ENTRY ARR 1: ", cutsArray);
+						// console.log("ENTRY ARR 1: ", cutsArray);
 						// console.log("index ", i);
 						if (cutsArray[i].size <= currentMaterial) {
 							// console.log("matrial length: ", currentMaterial);
-							console.log("found: ", cutsArray[i], " at index ", i);
+							// console.log("found: ", cutsArray[i], " at index ", i);
 							currentMaterial -= cutsArray[i].size;
 							// console.log("material after cutting: ", currentMaterial);
 							// console.log("removed item 1: ", cutsArray[i]);
 							order.push(cutsArray[i]);
 							cutsArray = cutsArray.slice(0, i).concat(cutsArray.slice(i + 1, cutsArray.length));
 							// this.removeItem(cutsArray, i);
-							console.log("array after slice: ", cutsArray);
+							// console.log("array after slice: ", cutsArray);
 						}
 					}
 
